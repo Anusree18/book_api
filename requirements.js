@@ -30,8 +30,8 @@
 // update/add new author for a book✅
 
 // DELETE
-// delete a book
-// delete an author
+// delete a book ✅
+// delete an author from a book✅
 
 
 // Authors
@@ -48,7 +48,7 @@
 // Update Author name using it's id ✅
 
 // DELETE
-// Delete an author
+// Delete an author ✅
 
 
 // Publications
@@ -63,8 +63,8 @@
 
 // PUT
 // Update the publication name using it's id ✅
-// update/add new book to a publication
+// update/add new book to a publication✅
 
 // DELETE
-// Delete the publication
-// delete a book from publication.
+// Delete a publication ✅
+// delete a book from publication. ✅
