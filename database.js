@@ -6,12 +6,12 @@ const books = [
       language: "en",
       numPage: 250,
       author: [1, 2],
-      publications: [1],
+      publication: [1],
       category: ["tech", "programming", "education", "thriller"],
     },
   ];
   
-  const author = [
+  const authors = [
     {
       id: 1 ,
       name: "Pavan",
@@ -24,7 +24,7 @@ const books = [
     },
   ];
   
-  const publication = [
+  const publications = [
     {
       id: 1,
       name: "writex",
@@ -32,4 +32,4 @@ const books = [
     },
   ];
 
-  module.exports = {books,author,publication};
+  module.exports = {books,authors,publications};
