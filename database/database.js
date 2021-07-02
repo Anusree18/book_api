@@ -32,4 +32,4 @@ let books = [
     },
   ];
 
-  module.exports = {books,authors,publications};
+  module.exports = {books,author,publication};
