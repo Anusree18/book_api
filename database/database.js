@@ -11,7 +11,7 @@ let books = [
     },
   ];
   
-  let authors = [
+  let author = [
     {
       id: 1 ,
       name: "Pavan",
@@ -24,7 +24,7 @@ let books = [
     },
   ];
   
-  const publications = [
+  const publication = [
     {
       id: 1,
       name: "writex",
