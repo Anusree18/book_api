@@ -10,6 +10,11 @@ const booky = express();
 //database
 const database = require("./database/database");
 
+//models
+const BookModels = require("./database/book");
+const AuthorModels = require("./database/author");
+const PublicationModels = require("./database/publication");
+
 //configuration
 booky.use(express.json());
 
