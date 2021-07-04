@@ -26,12 +26,12 @@
 // Add new book✅✔
 
 // PUT
-// Update book title✅
-// update/add new author for a book✅
+// Update book title✅✔
+// update/add new author for a book✅✔
 
 // DELETE
-// delete a book ✅
-// delete an author from a book✅
+// delete a book ✅✔
+// delete an author from a book✅✔
 
 
 // Authors
@@ -45,10 +45,10 @@
 // Add new author✅✔
 
 // PUT
-// Update Author name using it's id ✅
+// Update Author name using it's id ✅✔
 
 // DELETE
-// Delete an author ✅
+// Delete an author ✅✔
 
 
 // Publications
@@ -62,9 +62,9 @@
 // Add new publications ✅✔
 
 // PUT
-// Update the publication name using it's id ✅
-// update/add new book to a publication✅
+// Update the publication name using it's id ✅✔
+// update/add new book to a publication✅✔
 
 // DELETE
-// Delete a publication ✅
-// delete a book from publication. ✅
+// Delete a publication ✅✔
+// delete a book from publication. ✅✔
