@@ -9,8 +9,11 @@ Parameter      :NONE
 Methods        :GET
 */
 Router.get("/",async (req,res) =>{
-    const getAllPublications = await PublicationModel.find();
+    try{const getAllPublications = await PublicationModel.find();
     return res.json({publications: getAllPublications});
+    }catch(error){
+        return res.json({error: error.message});
+    }
 });
 
 
@@ -21,13 +24,17 @@ Parameter      :id
 Methods        :GET
 */
 Router.get("/id/:id",async(req,res) =>{
-    const getSpecificPlublication = await PublicationModel.findOne({
+    try{const getSpecificPlublication = await PublicationModel.findOne({
         id: req.params.id  });
     if(!getSpecificPlublication){
         return res.json({error: `No publication found for the id ${req.params.id}`,});
     }
     return res.json({publications: getSpecificPlublication},);
+}catch(error){
+    return res.json({error: error.message});
+}
 });
+
 /*Route        : /publications/id
 Description    :to get specific publications based on book 
 Access         :PUBLIC
@@ -35,14 +42,18 @@ Parameter      :isbn
 Methods        :GET
 */
 Router.get("/book/:isbn", async (req,res) => {
-    const getSpecificPlublication = await PublicationModel.find({books:{$in: req.params.isbn}});
+    try{const getSpecificPlublication = await PublicationModel.find({books:{$in: req.params.isbn}});
 
     if(!getSpecificPlublication){
         return res.json(
         {error: `No publication found for the book of ${req.params.isbn}`});
     }
     return res.json(getSpecificPlublication);
+}catch(error){
+    return res.json({error: error.message});
+}
 });
+
 /*Route        : /publication/update/name
 Description    :Update the publication name using it's id
 Access         :PUBLIC
@@ -50,7 +61,7 @@ Parameter      :ID
 Methods        :PUT
 */
 Router.put("/update/name/:ID",async(req,res) =>{
-    const updatedPublication = await PublicationModel.findOneAndUpdate(
+    try{const updatedPublication = await PublicationModel.findOneAndUpdate(
         {
             id: parseInt(req.params.ID)
         },
@@ -61,6 +72,9 @@ Router.put("/update/name/:ID",async(req,res) =>{
             new: true
         });
     return res.json({publications: updatedPublication});
+    }catch(error){
+        return res.json({error: error.message});
+    }
 });
 
 /*Route        : /publication/add
@@ -70,9 +84,12 @@ Parameter      :NONE
 Methods        :POST
 */
 Router.post("/add",async(req,res) =>{
-    const {newPublication} = req.body;
+    try{const {newPublication} = req.body;
     PublicationModel.create(newPublication);
     return res.json({message: "Publiction was added"});
+}catch(error){
+    return res.json({error: error.message});
+}
 });
 
 /*Route        : /publication/update/book
@@ -83,7 +100,7 @@ Methods        :PUT
 */
 Router.put("/update/book/:isbn", async(req,res)=>{
     //update the publication database
-    const updatedPublication = await PublicationModel.findOneAndUpdate(
+    try{const updatedPublication = await PublicationModel.findOneAndUpdate(
         {
             id: req.body.pubId
         },
@@ -112,6 +129,9 @@ Router.put("/update/book/:isbn", async(req,res)=>{
 
     
     return res.json({books: updatedBooks, publications: updatedPublication});
+    }catch(error){
+        return res.json({error: error.message});
+    }
 });
 
 /*Route        : /publication/delete
@@ -121,8 +141,11 @@ Parameter      :pubId
 Methods        :DELETE
 */
 Router.delete("/delete/:pubId",async (req,res)=>{
-    const updatedPublication = await PublicationModel.findOneAndDelete({id: parseInt(req.params.pubId)});
-        return res.json({publication: updatedPublication})
+    try{const updatedPublication = await PublicationModel.findOneAndDelete({id: parseInt(req.params.pubId)});
+        return res.json({publication: updatedPublication});
+}catch(error){
+    return res.json({error: error.message});
+}
 });
 
 /*Route        : /publication/delete/book
@@ -133,7 +156,7 @@ Methods        :DELETE
 */
 Router.delete("/delete/book/:isbn/:pubId",async(req,res)=>{
     //update the publication database
-   const updatedPublication = await PublicationModel.findOneAndUpdate(
+  try{ const updatedPublication = await PublicationModel.findOneAndUpdate(
        {
            id: parseInt(req.params.pubId)
        },
@@ -161,6 +184,9 @@ Router.delete("/delete/book/:isbn/:pubId",async(req,res)=>{
     );
     
     return res.json({books: updatedBook, publications: updatedPublication});
+    }catch(error){
+        return res.json({error: error.message});
+    }
 });
 
 module.exports = Router;

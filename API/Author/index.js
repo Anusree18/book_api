@@ -11,8 +11,11 @@ Methods        :GET
 */
 
 Router.get("/",async (req,res) => {
-    const getAllAuthors = await AuthorModel.find();
+    try{const getAllAuthors = await AuthorModel.find();
      return res.json({authors: getAllAuthors});
+    }catch(error){
+        return res.json({error: error.message});
+    }
 });
 
 
@@ -23,7 +26,7 @@ Parameter      :id
 Methods        :GET
 */
 Router.get("/id/:id",async (req,res) =>{
-    const getSpecificAuthor = await AuthorModel.findOne({
+    try{const getSpecificAuthor = await AuthorModel.findOne({
         id: req.params.id
     });
     if(!getSpecificAuthor) {
@@ -32,6 +35,9 @@ Router.get("/id/:id",async (req,res) =>{
         });
     }
     return res.json({authors: getSpecificAuthor},);
+}catch(error){
+    return res.json({error: error.message});
+}
 });
 
 /*Route        : /author/book
@@ -41,13 +47,16 @@ Parameter      :isbn
 Methods        :GET
 */
 Router.get("/book/:isbn", async (req,res) => {
-    const getSpecificAuthor = await AuthorModel.find({books: {$in: req.params.isbn}});
+   try{ const getSpecificAuthor = await AuthorModel.find({books: {$in: req.params.isbn}});
 
     if(!getSpecificAuthor){
         return res.json(
         {error: `No author found for the book of ${req.params.isbn}`});
     }
     return res.json({authors: getSpecificAuthor});
+}catch(error){
+    return res.json({error: error.message});
+}
 });
 
 /*Route        : /author/add
@@ -57,9 +66,12 @@ Parameter      :NONE
 Methods        :POST
 */
 Router.post("/add", async(req,res) => {
-    const { newAuthor } = req.body;
+    try{const { newAuthor } = req.body;
     AuthorModel.create(newAuthor);
     return res.json({message: "author was added"});
+}catch(error){
+    return res.json({error: error.message});
+}
 }); 
 
 /*Route        : /author/update/name
@@ -69,7 +81,7 @@ Parameter      :ID
 Methods        :PUT
 */
 Router.put("/update/name/:ID",async(req,res) =>{
-    const updatedAuthor = await AuthorModel.findOneAndUpdate(
+    try{const updatedAuthor = await AuthorModel.findOneAndUpdate(
         {
             id: parseInt(req.params.ID)
         },
@@ -80,6 +92,9 @@ Router.put("/update/name/:ID",async(req,res) =>{
             new: true
      });
      return res.json({authors: updatedAuthor});
+    }catch(error){
+        return res.json({error: error.message});
+    }
  });
  /*Route        : /author/delete
 Description    :Delete an author
@@ -88,8 +103,11 @@ Parameter      :authorId
 Methods        :DELETE
 */
 Router.delete("/delete/:authorId", async(req, res) =>{
-    const updatedAuthor = await AuthorModel.findOneAndDelete({id:  parseInt(req.params.authorId)});
+    try{const updatedAuthor = await AuthorModel.findOneAndDelete({id:  parseInt(req.params.authorId)});
     return res.json({authors: updatedAuthor});
+}catch(error){
+    return res.json({error: error.message});
+}
 });
  
 module.exports = Router;
